@@ -1,0 +1,31 @@
+name: Pull Request
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  velociraptor-version: 1.5.0
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: "1.25.2"
+      - name: Setup velociraptor
+        run: |
+          deno install -qAn vr https://deno.land/x/velociraptor@${{ env.velociraptor-version }}/cli.ts
+          echo "$HOME/.deno/bin" >> $GITHUB_PATH
+      - name: Format check and lint
+        run: VR_HOOKS=false vr ci
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage.lcov
+          fail_ci_if_error: true
+          verbose: true

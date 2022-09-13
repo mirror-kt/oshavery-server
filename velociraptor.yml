@@ -23,7 +23,7 @@ scripts:
     gitHook: pre-commit
 
   test:
-    cmd: deno test --reload --coverage=cov_profile --
+    cmd: deno test --doc --reload --coverage=cov_profile --
     desc: Runs the tests
     gitHook: pre-push
 
@@ -35,5 +35,6 @@ scripts:
     cmd:
       - deno lint
       - deno fmt --check
-      - deno test --reload
+      - vr run test
+      - deno coverage ./cov_profile --lcov > coverage.lcov
     desc: Runs lint, check format and test
