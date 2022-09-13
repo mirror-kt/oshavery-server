@@ -1,4 +1,4 @@
-import {Snowflake} from '/util/snowflake.ts';
+import { Snowflake } from '/util/snowflake.ts';
 import ValueSchema from 'value_schema';
 
 declare const userIdNominality: unique symbol;
@@ -60,6 +60,7 @@ export class RegisteredUser {
 
   /**
    * ユーザーに表示名を設定する.
+   * 表示名は最長32文字.
    *
    * @param name
    */
@@ -72,7 +73,7 @@ export class RegisteredUser {
     ValueSchema.string({
       maxLength: {
         length: 32,
-        trims: true,
+        trims: false,
       },
     }).applyTo(name);
   }
