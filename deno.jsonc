@@ -27,7 +27,11 @@
   },
   "fmt": {
     "files": {
-      "include": ["src/"]
+      "include": [
+        "src/",
+        "*.json",
+        "*.jsonc"
+      ]
     },
     "options": {
       "useTabs": false,
