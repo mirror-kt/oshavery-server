@@ -1,4 +1,7 @@
 {
   "imports": {
+    "/": "./src/",
+    "./": "./src/",
+    "value_schema": "https://deno.land/x/value_schema@v4.0.0-rc.1/mod.ts"
   }
 }
