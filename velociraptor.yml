@@ -1,0 +1,39 @@
+allow:
+# - write
+# - read
+# - net
+#  - env
+
+#envFile:
+#  - .env
+
+scripts:
+  start:
+    desc: Runs main script
+    cmd: src/main.ts
+
+  lint:
+    cmd: deno lint
+    desc: Runs lint
+    gitHook: pre-commit
+
+  fmt:
+    cmd: deno fmt
+    desc: Runs format
+    gitHook: pre-commit
+
+  test:
+    cmd: deno test --reload --coverage=cov_profile --
+    desc: Runs the tests
+    gitHook: pre-push
+
+  cov:
+    cmd: deno coverage cov_profile
+    desc: Shows uncovered lists
+
+  ci:
+    cmd:
+      - deno lint
+      - deno fmt --check
+      - deno test --reload
+    desc: Runs lint, check format and test
