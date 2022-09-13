@@ -10,8 +10,19 @@
       "include": ["src/"]
     },
     "rules": {
-      "tags": ["recommended"],
-      "include": ["ban-untagged-todo"]
+      "tags": [
+        "recommended"
+      ],
+      "include": [
+        "ban-untagged-todo",
+        "camelcase",
+        "eqeqeq",
+        "explicit-function-return-type",
+        "no-await-in-loop",
+        "no-const-assign",
+        "no-eval",
+        "no-non-null-assertion"
+      ]
     }
   },
   "fmt": {
