@@ -19,7 +19,7 @@ impl<T> Id<T> {
         Utc.timestamp_nanos(timestamp as i64)
     }
 
-    fn new() -> Self {
+    fn generate() -> Self {
         let uuid = Uuid::new_v7(Timestamp::now());
 
         Self {
