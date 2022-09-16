@@ -11,9 +11,17 @@ pub struct RegisteredUser {
 }
 
 impl RegisteredUser {
-    fn new(id: Id<RegisteredUser>, email: String) -> Self {
+    pub fn new(id: Id<RegisteredUser>, email: String) -> Self {
         let user = Self { id, email };
         user.validate().context("invalid format").unwrap();
         user
+    }
+
+    pub fn id(&self) -> &Id<RegisteredUser> {
+        &self.id
+    }
+
+    pub fn email(&self) -> &str {
+        &self.email
     }
 }
