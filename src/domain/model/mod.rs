@@ -1,3 +1,3 @@
-pub use user::*;
+pub use registered_user::*;
 
-mod user;
+mod registered_user;
