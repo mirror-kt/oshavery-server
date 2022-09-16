@@ -1,16 +1,21 @@
 use std::marker::PhantomData;
-use chrono::{TimeZone, Utc};
+
+use anyhow::Context as _;
+use chrono::{DateTime, TimeZone, Utc};
 use uuid::{Timestamp, Uuid};
 
 #[derive(Eq, PartialEq, Debug, Ord, PartialOrd)]
 pub struct Id<T> {
     value: Uuid,
-    _phantom: PhantomData<fn() -> T>
+    _phantom: PhantomData<fn() -> T>,
 }
 
 impl<T> Id<T> {
-    fn timestamp(&self) -> chrono::DateTime<Utc> {
-        let timestamp = self.value.get_timestamp().unwrap().to_unix_nanos();
+    fn timestamp(&self) -> DateTime<Utc> {
+        let timestamp = self.value.get_timestamp()
+            .context("this uuid version does not support timestamps")
+            .unwrap() // safety: UUID v7はtimestampを取得することができる
+            .to_unix_nanos();
         Utc.timestamp_nanos(timestamp as i64)
     }
 
@@ -19,7 +24,7 @@ impl<T> Id<T> {
 
         Self {
             value: uuid,
-            _phantom: PhantomData
+            _phantom: PhantomData,
         }
     }
 }
