@@ -13,9 +13,7 @@ pub struct RegisteredUser {
 impl RegisteredUser {
     fn new(id: Id<RegisteredUser>, email: String) -> Self {
         let user = Self { id, email };
-        user.validate()
-            .context("invalid format")
-            .unwrap();
+        user.validate().context("invalid format").unwrap();
         user
     }
 }
