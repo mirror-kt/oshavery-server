@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.22"
 uuid = { git = "https://github.com/uuid-rs/uuid", features = ["v7"] }
+validator = { version = "0.16.0", features = ["derive"] }
